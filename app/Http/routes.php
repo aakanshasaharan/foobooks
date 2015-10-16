@@ -11,26 +11,23 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+//route: Home page/index for project 3
+Route::get('/', function()
+{
+	return View::make('index');
 });
 
+//route: loremipsum paragraphs generator page
+Route::get('/loremipsum', 'LoremIpsumController@getLoremipsum');
+Route::post('/loremipsum', 'LoremIpsumController@postLoremipsum');
 
-Route::get('/books', function () {
-    return "Here are all the books in the fooobooks.";
-});
-
-
-Route::get('/bio', function () {
-    return "Here is the bio for all the participants.";
-});
-
-Route::get('/people', function () {
-    return "No of people could go upto 1000.";
-});
+//route: randomuser generator page
+Route::get('/randomuser', 'LoremIpsumController@getRandomUser');
+Route::post('/randomuser', 'LoremIpsumController@postRandomUser');
 
 
-Route::get('/detail', function () {
-    return "what are the details.";
-});
 
+//log view shown on local-env, hidden on production-env
+if(App::environment('local')) {
+    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+};
